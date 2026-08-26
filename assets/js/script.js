@@ -9,17 +9,41 @@
     'assets/img/gallery/dsc06655.jpg',
     'assets/img/gallery/dsc07348.jpg',
     'assets/img/gallery/dsc06202.jpg',
-    'assets/img/gallery/dsc07191.jpg'
+    'assets/img/gallery/dsc07191.jpg',
+    'assets/img/gallery/f0f0582b.jpg',
+    'assets/img/gallery/dsc08390.jpg',
+    'assets/img/gallery/f3122044.jpg',
+    'assets/img/gallery/3161eebb.jpg',
+    'assets/img/gallery/dsc07121.jpg',
+    'assets/img/gallery/2e32c588.jpg'
   ];
   var heroBg = document.getElementById('heroBg');
   if (heroBg) {
+    // Shared draw order: every slot pulls its next image from this single
+    // shuffled queue, so the same photo never shows in two slots at once.
+    function shuffle(arr) {
+      var a = arr.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+      }
+      return a;
+    }
+    var drawQueue = shuffle(heroImages);
+    var drawIndex = 0;
+    function nextImage() {
+      if (drawIndex >= drawQueue.length) {
+        drawQueue = shuffle(heroImages);
+        drawIndex = 0;
+      }
+      return drawQueue[drawIndex++];
+    }
+
     var slots = Array.prototype.slice.call(heroBg.querySelectorAll('.hero-bg-slot'));
     slots.forEach(function (slot, i) {
       var layers = slot.querySelectorAll('.hero-bg-layer');
-      var pointer = i % heroImages.length;
-      layers[0].style.backgroundImage = 'url(' + heroImages[pointer] + ')';
+      layers[0].style.backgroundImage = 'url(' + nextImage() + ')';
       slot._activeLayer = 0;
-      slot._pointer = pointer;
 
       setTimeout(function () {
         layers[0].classList.add('is-active');
@@ -29,9 +53,7 @@
 
       setInterval(function () {
         var nextLayerIndex = slot._activeLayer === 0 ? 1 : 0;
-        slot._pointer = (slot._pointer + 1) % heroImages.length;
-        var nextImg = heroImages[slot._pointer];
-        layers[nextLayerIndex].style.backgroundImage = 'url(' + nextImg + ')';
+        layers[nextLayerIndex].style.backgroundImage = 'url(' + nextImage() + ')';
         layers[nextLayerIndex].classList.add('is-active');
         layers[slot._activeLayer].classList.remove('is-active');
         slot._activeLayer = nextLayerIndex;

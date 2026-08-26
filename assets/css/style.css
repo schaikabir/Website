@@ -219,12 +219,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background-size: cover;
   background-position: center;
   opacity: 0;
-  filter: grayscale(40%) contrast(1.1);
+  filter: grayscale(20%);
   transform: scale(1.08);
   transition: opacity 1.6s ease;
   animation: hero-drift 30s ease-in-out infinite alternate;
 }
-.hero-bg-layer.is-active { opacity: 0.16; }
+.hero-bg-layer.is-active { opacity: 0.4; }
 .hero-bg-slot:nth-child(2) .hero-bg-layer { animation-delay: -7s; }
 .hero-bg-slot:nth-child(3) .hero-bg-layer { animation-delay: -15s; }
 .hero-bg-slot:nth-child(4) .hero-bg-layer { animation-delay: -22s; }
@@ -241,8 +241,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(8,8,10,0.74) 0%, rgba(8,8,10,0.89) 55%, rgba(8,8,10,0.98) 100%),
-    rgba(8,8,10,0.55);
+    linear-gradient(180deg, rgba(8,8,10,0.35) 0%, rgba(8,8,10,0.6) 55%, rgba(8,8,10,0.92) 100%),
+    rgba(8,8,10,0.2);
 }
 
 @media (max-width: 720px) {
@@ -263,6 +263,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   width: min(220px, 42vw);
   height: auto;
   filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
+}
+
+.hero-brand {
+  width: min(115px, 22vw);
+  height: auto;
+  opacity: 0.85;
+  margin-top: calc(-1 * var(--space-3) + 16px);
 }
 
 .hero-actions {
