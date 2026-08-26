@@ -304,22 +304,31 @@ section { padding: var(--space-6) 0; }
 /* ============ Work / video grid ============ */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-3);
 }
-@media (max-width: 720px) {
+@media (max-width: 900px) {
+  .video-grid { grid-template-columns: repeat(2, 1fr); }
+  .video-card.is-featured { grid-column: span 2; aspect-ratio: 16 / 9; }
+}
+@media (max-width: 560px) {
   .video-grid { grid-template-columns: 1fr; }
+  .video-card.is-featured { grid-column: span 1; aspect-ratio: 4 / 3; }
 }
 
 .video-card {
   position: relative;
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--color-card);
   text-align: left;
+}
+.video-card.is-featured {
+  grid-column: span 4;
+  aspect-ratio: 21 / 9;
 }
 .video-card-poster {
   width: 100%;
