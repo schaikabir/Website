@@ -1,6 +1,68 @@
 (function () {
   'use strict';
 
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hero background: crossfading excerpts of portfolio photos
+  var heroImages = [
+    'assets/img/gallery/dsc06241.jpg',
+    'assets/img/gallery/dsc06655.jpg',
+    'assets/img/gallery/dsc07348.jpg',
+    'assets/img/gallery/dsc06202.jpg',
+    'assets/img/gallery/dsc07191.jpg'
+  ];
+  var heroBg = document.getElementById('heroBg');
+  if (heroBg) {
+    var slots = Array.prototype.slice.call(heroBg.querySelectorAll('.hero-bg-slot'));
+    slots.forEach(function (slot, i) {
+      var layers = slot.querySelectorAll('.hero-bg-layer');
+      var pointer = i % heroImages.length;
+      layers[0].style.backgroundImage = 'url(' + heroImages[pointer] + ')';
+      slot._activeLayer = 0;
+      slot._pointer = pointer;
+
+      setTimeout(function () {
+        layers[0].classList.add('is-active');
+      }, 200 + i * 150);
+
+      if (prefersReducedMotion) return;
+
+      setInterval(function () {
+        var nextLayerIndex = slot._activeLayer === 0 ? 1 : 0;
+        slot._pointer = (slot._pointer + 1) % heroImages.length;
+        var nextImg = heroImages[slot._pointer];
+        layers[nextLayerIndex].style.backgroundImage = 'url(' + nextImg + ')';
+        layers[nextLayerIndex].classList.add('is-active');
+        layers[slot._activeLayer].classList.remove('is-active');
+        slot._activeLayer = nextLayerIndex;
+      }, 6000 + i * 1400);
+    });
+  }
+
+  // Video cards: play a muted preview on hover (pointer devices only)
+  var canHoverPreview = window.matchMedia('(hover: hover)').matches && !prefersReducedMotion;
+  if (canHoverPreview) {
+    document.querySelectorAll('.video-card').forEach(function (card) {
+      var preview = card.querySelector('.video-card-preview');
+      if (!preview) return;
+
+      card.addEventListener('mouseenter', function () {
+        if (!preview.getAttribute('src')) {
+          preview.setAttribute('src', preview.getAttribute('data-src'));
+        }
+        card.classList.add('is-previewing');
+        var playPromise = preview.play();
+        if (playPromise && playPromise.catch) playPromise.catch(function () {});
+      });
+
+      card.addEventListener('mouseleave', function () {
+        card.classList.remove('is-previewing');
+        preview.pause();
+        preview.currentTime = 0;
+      });
+    });
+  }
+
   // Footer year
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
