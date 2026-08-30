@@ -263,6 +263,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   width: min(220px, 42vw);
   height: auto;
   filter: drop-shadow(0 8px 30px rgba(0,0,0,0.5));
+  animation: logo-fly-in 900ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes logo-fly-in {
+  0%   { opacity: 0; transform: translateY(-90px) scale(0.92); }
+  65%  { opacity: 1; transform: translateY(6px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .hero-brand {
@@ -270,6 +277,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   height: auto;
   opacity: 0.85;
   margin-top: calc(-1 * var(--space-3) + 16px);
+  animation: brand-fade-in 600ms ease-out 650ms both;
+}
+
+@keyframes brand-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 0.85; transform: translateY(0); }
 }
 
 .hero-actions {
