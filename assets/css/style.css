@@ -343,6 +343,20 @@ section { padding: var(--space-6) 0; }
   grid-column: span 4;
   aspect-ratio: 21 / 9;
 }
+.video-card.is-featured .video-card-poster,
+.video-card.is-featured .video-card-preview {
+  object-position: top;
+}
+.video-card.is-wide {
+  grid-column: 2 / span 2;
+  aspect-ratio: 16 / 9;
+}
+@media (max-width: 900px) {
+  .video-card.is-wide { grid-column: span 2; }
+}
+@media (max-width: 560px) {
+  .video-card.is-wide { grid-column: span 1; aspect-ratio: 4 / 3; }
+}
 .video-card-poster {
   width: 100%;
   height: 100%;
