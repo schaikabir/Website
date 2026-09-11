@@ -3,7 +3,7 @@
 
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Hero background: crossfading excerpts of portfolio photos
+  // Hero background: crossfading excerpts of portfolio photos and video clips
   var heroImages = [
     'assets/img/gallery/dsc06241.jpg',
     'assets/img/gallery/dsc06655.jpg',
@@ -17,10 +17,23 @@
     'assets/img/gallery/dsc07121.jpg',
     'assets/img/gallery/2e32c588.jpg'
   ];
+  var heroVideoClips = [
+    'assets/video/bg/bg-static.mp4',
+    'assets/video/bg/bg-cinematic.mp4',
+    'assets/video/bg/bg-showreel.mp4',
+    'assets/video/bg/bg-reelalt.mp4',
+    'assets/video/bg/bg-timeline.mp4',
+    'assets/video/bg/bg-documentary.mp4'
+  ];
   var heroBg = document.getElementById('heroBg');
   if (heroBg) {
-    // Shared draw order: every slot pulls its next image from this single
-    // shuffled queue, so the same photo never shows in two slots at once.
+    var heroMedia = heroImages.map(function (src) { return { type: 'image', src: src }; });
+    if (!prefersReducedMotion) {
+      heroMedia = heroMedia.concat(heroVideoClips.map(function (src) { return { type: 'video', src: src }; }));
+    }
+
+    // Shared draw order: every slot pulls its next media item from this
+    // single shuffled queue, so nothing shows in two slots at once.
     function shuffle(arr) {
       var a = arr.slice();
       for (var i = a.length - 1; i > 0; i--) {
@@ -29,20 +42,47 @@
       }
       return a;
     }
-    var drawQueue = shuffle(heroImages);
+    var drawQueue = shuffle(heroMedia);
     var drawIndex = 0;
-    function nextImage() {
+    function nextMedia() {
       if (drawIndex >= drawQueue.length) {
-        drawQueue = shuffle(heroImages);
+        drawQueue = shuffle(heroMedia);
         drawIndex = 0;
       }
       return drawQueue[drawIndex++];
     }
 
+    function renderMedia(layerEl, media) {
+      layerEl.innerHTML = '';
+      var el;
+      if (media.type === 'video') {
+        el = document.createElement('video');
+        el.muted = true;
+        el.loop = true;
+        el.playsInline = true;
+        el.preload = 'auto';
+        el.src = media.src;
+      } else {
+        el = document.createElement('img');
+        el.alt = '';
+        el.src = media.src;
+      }
+      layerEl.appendChild(el);
+      if (media.type === 'video') {
+        var playPromise = el.play();
+        if (playPromise && playPromise.catch) playPromise.catch(function () {});
+      }
+    }
+
+    function pauseLayerVideo(layerEl) {
+      var v = layerEl.querySelector('video');
+      if (v) v.pause();
+    }
+
     var slots = Array.prototype.slice.call(heroBg.querySelectorAll('.hero-bg-slot'));
     slots.forEach(function (slot, i) {
       var layers = slot.querySelectorAll('.hero-bg-layer');
-      layers[0].style.backgroundImage = 'url(' + nextImage() + ')';
+      renderMedia(layers[0], nextMedia());
       slot._activeLayer = 0;
 
       setTimeout(function () {
@@ -53,9 +93,10 @@
 
       setInterval(function () {
         var nextLayerIndex = slot._activeLayer === 0 ? 1 : 0;
-        layers[nextLayerIndex].style.backgroundImage = 'url(' + nextImage() + ')';
+        renderMedia(layers[nextLayerIndex], nextMedia());
         layers[nextLayerIndex].classList.add('is-active');
         layers[slot._activeLayer].classList.remove('is-active');
+        pauseLayerVideo(layers[slot._activeLayer]);
         slot._activeLayer = nextLayerIndex;
       }, 6000 + i * 1400);
     });
