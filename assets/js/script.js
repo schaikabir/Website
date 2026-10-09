@@ -19,6 +19,7 @@
   ];
   var heroVideoClips = [
     'assets/video/bg/bg-static.mp4',
+    'assets/video/bg/bg-lagos.mp4',
     'assets/video/bg/bg-cinematic.mp4',
     'assets/video/bg/bg-showreel.mp4',
     'assets/video/bg/bg-reelalt.mp4',
