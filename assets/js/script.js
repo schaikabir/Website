@@ -80,7 +80,9 @@
       if (v) v.pause();
     }
 
-    var slots = Array.prototype.slice.call(heroBg.querySelectorAll('.hero-bg-slot'));
+    var slots = Array.prototype.slice.call(heroBg.querySelectorAll('.hero-bg-slot')).filter(function (slot) {
+      return slot.offsetParent !== null;
+    });
     slots.forEach(function (slot, i) {
       var layers = slot.querySelectorAll('.hero-bg-layer');
       renderMedia(layers[0], nextMedia());
