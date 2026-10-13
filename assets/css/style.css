@@ -369,6 +369,8 @@ section { padding: var(--space-6) 0; }
   .video-card.is-featured { grid-column: span 2; }
   .video-card.is-landscape { grid-column: span 1; }
 }
+.video-card[data-video*="documentary"] .video-card-poster,
+.video-card[data-video*="documentary"] .video-card-preview { object-position: 50% 100%; }
 .video-card-poster {
   width: 100%;
   height: 100%;
@@ -703,7 +705,8 @@ section { padding: var(--space-6) 0; }
   .video-card-title { font-size: 15px; }
   .video-card-sub { font-size: 12px; }
   .video-card:not(.is-featured):not(.is-landscape) .video-card-title { font-size: 12.5px; }
-  .video-card:not(.is-featured):not(.is-landscape) .video-card-sub { display: none; }
+  .video-card:not(.is-featured):not(.is-landscape) { aspect-ratio: 5 / 8; }
+  .video-card:not(.is-featured):not(.is-landscape) .video-card-sub { font-size: 11px; line-height: 1.3; }
   .video-card:not(.is-featured):not(.is-landscape) .play-icon {
     top: 10px;
     bottom: auto;
