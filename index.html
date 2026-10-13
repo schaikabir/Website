@@ -3,12 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>by_schai — Videograf Portfolio</title>
-<meta name="description" content="by_schai — Videograf. Cineastische Videoproduktion, Creative Cuts und Referenzen.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>by_schai — Videograf aus Darmstadt &amp; Frankfurt | Portfolio</title>
+<meta name="description" content="by_schai (Schai Kabir) — Videograf aus Frankfurt und Darmstadt. Cineastische Videoproduktion, Schnitt und Sounddesign: Creative Cuts, Eventfilme und Dokumentarfilm.">
+<link rel="canonical" href="https://byschai.de/">
+<meta name="theme-color" content="#08080a">
+<meta name="author" content="Schai Kabir">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="by_schai">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="by_schai — Videograf aus Darmstadt &amp; Frankfurt">
+<meta property="og:description" content="Cineastische Videoproduktion, Schnitt und Sounddesign. Creative Cuts, Eventfilme und Dokumentarfilm.">
+<meta property="og:url" content="https://byschai.de/">
+<meta property="og:image" content="https://byschai.de/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="by_schai Logo auf dunklem Hintergrund">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="by_schai — Videograf aus Darmstadt &amp; Frankfurt">
+<meta name="twitter:description" content="Cineastische Videoproduktion, Schnitt und Sounddesign.">
+<meta name="twitter:image" content="https://byschai.de/assets/img/og-image.jpg">
+
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("js");</script>
 <link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Schai Kabir", "alternateName": "by_schai", "url": "https://byschai.de/", "jobTitle": "Videograf", "description": "Videograf aus Frankfurt und Darmstadt: Kamera, Videoschnitt und Sounddesign.", "address": {"@type": "PostalAddress", "addressLocality": "Darmstadt", "addressCountry": "DE"}, "alumniOf": {"@type": "CollegeOrUniversity", "name": "Hochschule RheinMain"}, "sameAs": ["https://www.instagram.com/by_schai/", "https://www.linkedin.com/in/schai-kabir-1aa272264"]}</script>
 </head>
 <body>
 
@@ -73,21 +96,23 @@
 
       <div class="video-grid">
 
-        <button type="button" class="video-card is-featured" data-video="assets/video/lagos.mp4" data-title="Creative Cut">
-          <img src="assets/posters/lagos.jpg" alt="" loading="lazy" class="video-card-poster">
-          <video class="video-card-preview" data-src="assets/video/lagos.mp4" muted loop playsinline preload="none"></video>
+        <button type="button" class="video-card is-featured" data-video="assets/video/lagos.mp4" data-title="Lagos" data-meta="Reisefilm · Portugal 2026">
+          <img src="assets/posters/lagos.jpg" alt="" width="1440" height="1080" loading="lazy" class="video-card-poster">
+          <video class="video-card-preview" data-src="assets/video/lagos.mp4" data-mobile-src="assets/video/bg/bg-lagos.mp4" muted loop playsinline preload="none"></video>
           <span class="video-card-overlay">
             <span class="play-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             </span>
             <span class="video-card-meta">
               <span class="video-card-tag">Creative Cut</span>
+              <span class="video-card-title">Lagos</span>
+              <span class="video-card-sub">Reisefilm · Portugal 2026</span>
             </span>
           </span>
         </button>
 
-        <button type="button" class="video-card is-landscape" data-video="assets/video/static.mp4" data-title="Creative Cut">
-          <img src="assets/posters/static.jpg" alt="" loading="lazy" class="video-card-poster">
+        <button type="button" class="video-card is-landscape" data-video="assets/video/static.mp4" data-title="Creative Cut" data-meta="Edit · Darmstadt">
+          <img src="assets/posters/static.jpg" alt="" width="1440" height="1080" loading="lazy" class="video-card-poster">
           <video class="video-card-preview" data-src="assets/video/static.mp4" muted loop playsinline preload="none"></video>
           <span class="video-card-overlay">
             <span class="play-icon" aria-hidden="true">
@@ -95,12 +120,13 @@
             </span>
             <span class="video-card-meta">
               <span class="video-card-tag">Creative Cut</span>
+              <span class="video-card-sub">Edit · Darmstadt</span>
             </span>
           </span>
         </button>
 
-        <button type="button" class="video-card is-landscape" data-video="assets/video/cinematic-edit.mp4" data-title="Creative Cut">
-          <img src="assets/posters/cinematic-edit.jpg" alt="" loading="lazy" class="video-card-poster">
+        <button type="button" class="video-card is-landscape" data-video="assets/video/cinematic-edit.mp4" data-title="Mainhattan Collective" data-meta="Eventfilm · Frankfurt">
+          <img src="assets/posters/cinematic-edit.jpg" alt="" width="1400" height="1050" loading="lazy" class="video-card-poster">
           <video class="video-card-preview" data-src="assets/video/cinematic-edit.mp4" muted loop playsinline preload="none"></video>
           <span class="video-card-overlay">
             <span class="play-icon" aria-hidden="true">
@@ -108,12 +134,14 @@
             </span>
             <span class="video-card-meta">
               <span class="video-card-tag">Creative Cut</span>
+              <span class="video-card-title">Mainhattan Collective</span>
+              <span class="video-card-sub">Eventfilm · Frankfurt</span>
             </span>
           </span>
         </button>
 
-        <button type="button" class="video-card" data-video="assets/video/showreel-main.mp4" data-title="Creative Cut">
-          <img src="assets/posters/showreel-main.jpg" alt="" loading="lazy" class="video-card-poster">
+        <button type="button" class="video-card" data-video="assets/video/showreel-main.mp4" data-title="Capybara" data-meta="Nightlife-Event">
+          <img src="assets/posters/showreel-main.jpg" alt="" width="787" height="1400" loading="lazy" class="video-card-poster">
           <video class="video-card-preview" data-src="assets/video/showreel-main.mp4" muted loop playsinline preload="none"></video>
           <span class="video-card-overlay">
             <span class="play-icon" aria-hidden="true">
@@ -121,12 +149,14 @@
             </span>
             <span class="video-card-meta">
               <span class="video-card-tag">Creative Cut</span>
+              <span class="video-card-title">Capybara</span>
+              <span class="video-card-sub">Nightlife-Event</span>
             </span>
           </span>
         </button>
 
-        <button type="button" class="video-card" data-video="assets/video/reel-alt-cut.mp4" data-title="Sounddesign">
-          <img src="assets/posters/reel-alt-cut.jpg" alt="" loading="lazy" class="video-card-poster">
+        <button type="button" class="video-card" data-video="assets/video/reel-alt-cut.mp4" data-title="Only Sound Design" data-meta="Sounddesign-Reel">
+          <img src="assets/posters/reel-alt-cut.jpg" alt="" width="787" height="1400" loading="lazy" class="video-card-poster">
           <video class="video-card-preview" data-src="assets/video/reel-alt-cut.mp4" muted loop playsinline preload="none"></video>
           <span class="video-card-overlay">
             <span class="play-icon" aria-hidden="true">
@@ -134,12 +164,14 @@
             </span>
             <span class="video-card-meta">
               <span class="video-card-tag">Sounddesign</span>
+              <span class="video-card-title">Only Sound Design</span>
+              <span class="video-card-sub">Sounddesign-Reel</span>
             </span>
           </span>
         </button>
 
-        <button type="button" class="video-card" data-video="assets/video/timeline-cut.mp4" data-title="Short Cut">
-          <img src="assets/posters/timeline-cut.jpg" alt="" loading="lazy" class="video-card-poster">
+        <button type="button" class="video-card" data-video="assets/video/timeline-cut.mp4" data-title="Thailand" data-meta="Gedreht mit dem iPhone">
+          <img src="assets/posters/timeline-cut.jpg" alt="" width="787" height="1400" loading="lazy" class="video-card-poster">
           <video class="video-card-preview" data-src="assets/video/timeline-cut.mp4" muted loop playsinline preload="none"></video>
           <span class="video-card-overlay">
             <span class="play-icon" aria-hidden="true">
@@ -147,12 +179,14 @@
             </span>
             <span class="video-card-meta">
               <span class="video-card-tag">Short Cut</span>
+              <span class="video-card-title">Thailand</span>
+              <span class="video-card-sub">Gedreht mit dem iPhone</span>
             </span>
           </span>
         </button>
 
-        <button type="button" class="video-card" data-video="assets/video/documentary.mp4" data-title="Documentary">
-          <img src="assets/posters/documentary.jpg" alt="" loading="lazy" class="video-card-poster">
+        <button type="button" class="video-card" data-video="assets/video/documentary.mp4" data-title="Perspektivlos trotz Perspektive" data-meta="Studienprojekt · Hochschule RheinMain">
+          <img src="assets/posters/documentary.jpg" alt="" width="787" height="1400" loading="lazy" class="video-card-poster">
           <video class="video-card-preview" data-src="assets/video/documentary.mp4" muted loop playsinline preload="none"></video>
           <span class="video-card-overlay">
             <span class="play-icon" aria-hidden="true">
@@ -160,6 +194,8 @@
             </span>
             <span class="video-card-meta">
               <span class="video-card-tag">Documentary</span>
+              <span class="video-card-title">Perspektivlos trotz Perspektive</span>
+              <span class="video-card-sub">Studienprojekt · Hochschule RheinMain</span>
             </span>
           </span>
         </button>
@@ -171,7 +207,7 @@
   <section id="about" class="about">
     <div class="container about-inner">
       <div class="about-image">
-        <img src="assets/img/gallery/img_9459.jpg" alt="by_schai bei einem Videodreh mit Kamera-Gimbal" loading="lazy">
+        <img src="assets/img/gallery/img_9459.jpg" alt="by_schai bei einem Videodreh mit Kamera-Gimbal" width="1551" height="2200" loading="lazy">
       </div>
       <div class="about-text">
         <p class="eyebrow">Über mich</p>
@@ -195,7 +231,26 @@
       <p class="eyebrow">Kontakt</p>
       <h2 class="section-title">Lust auf Zusammenarbeit?</h2>
       <p class="section-sub">Schreib mir für Projekte, Anfragen oder einfach zum Reinschauen.</p>
-      <a href="mailto:Kabir.Schai@gmail.com" class="btn btn-primary contact-email">Kabir.Schai@gmail.com</a>
+            <a href="mailto:Kabir.Schai@gmail.com" class="btn btn-primary contact-email">Kabir.Schai@gmail.com</a>
+
+      <p class="contact-or">oder schreib direkt hier</p>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cfName">Name</label>
+          <input id="cfName" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="cfEmail">Deine E-Mail</label>
+          <input id="cfEmail" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field field-full">
+          <label for="cfMsg">Worum geht es?</label>
+          <textarea id="cfMsg" name="message" rows="5" required></textarea>
+        </div>
+        <p class="form-error" id="cfError" role="alert" hidden>Bitte fülle alle Felder aus.</p>
+        <button type="submit" class="btn btn-primary">Nachricht vorbereiten</button>
+        <p class="form-hint">Das öffnet dein E-Mail-Programm mit der fertigen Nachricht. Es werden keine Daten an einen Server gesendet. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+      </form>
       <div class="social-links">
         <a href="https://www.instagram.com/by_schai/" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
@@ -213,6 +268,10 @@
   <div class="container footer-inner">
     <img src="assets/img/logo/logo-white-sm.png" alt="by_schai" class="footer-logo" width="28" height="47">
     <p>&copy; <span id="year"></span> by_schai. Alle Rechte vorbehalten.</p>
+    <nav class="footer-links" aria-label="Rechtliches">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </nav>
   </div>
 </footer>
 

@@ -129,6 +129,65 @@
     });
   }
 
+  // Touch devices (no hover): auto-play a tiny muted teaser on the featured banner while it is on screen
+  var saveData = navigator.connection && navigator.connection.saveData;
+  if (!canHoverPreview && !prefersReducedMotion && !saveData && 'IntersectionObserver' in window) {
+    var featured = document.querySelector('.video-card.is-featured');
+    var teaser = featured && featured.querySelector('.video-card-preview');
+    if (teaser) {
+      var teaserTimer = null;
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          clearTimeout(teaserTimer);
+          if (entry.isIntersecting) {
+            // short delay so the title card in the thumbnail can be read first
+            teaserTimer = setTimeout(function () {
+              if (!teaser.getAttribute('src')) {
+                teaser.setAttribute('src', teaser.getAttribute('data-mobile-src') || teaser.getAttribute('data-src'));
+              }
+              featured.classList.add('is-previewing');
+              var pp = teaser.play();
+              if (pp && pp.catch) pp.catch(function () {});
+            }, 1500);
+          } else {
+            featured.classList.remove('is-previewing');
+            teaser.pause();
+          }
+        });
+      }, { threshold: 0.6 }).observe(featured);
+    }
+  }
+
+  // Scroll reveal: content blurs in as it enters the viewport (skipped for reduced motion)
+  if (document.documentElement.classList.contains('js')) {
+    var revealEls = Array.prototype.slice.call(document.querySelectorAll(
+      '.work .eyebrow, .work .section-title, .work .section-sub, .video-card, .about-image, .about-text, .contact-inner'
+    ));
+    if ('IntersectionObserver' in window) {
+      var cardIndex = 0;
+      revealEls.forEach(function (el) {
+        el.classList.add('reveal');
+        if (el.classList.contains('video-card')) {
+          el.style.setProperty('--reveal-delay', (el.classList.contains('is-featured') ? 0 : (cardIndex % 4) * 110) + 'ms');
+          cardIndex++;
+        } else if (el.classList.contains('section-title')) {
+          el.style.setProperty('--reveal-delay', '80ms');
+        } else if (el.classList.contains('section-sub')) {
+          el.style.setProperty('--reveal-delay', '160ms');
+        }
+      });
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+      revealEls.forEach(function (el) { revealObserver.observe(el); });
+    }
+  }
+
   // Footer year
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -189,7 +248,9 @@
 
   document.querySelectorAll('.video-card').forEach(function (card) {
     card.addEventListener('click', function () {
-      openLightbox(card.getAttribute('data-video'), card.getAttribute('data-title'));
+      var meta = card.getAttribute('data-meta');
+      var label = card.getAttribute('data-title') + (meta ? ' \u2014 ' + meta : '');
+      openLightbox(card.getAttribute('data-video'), label);
     });
   });
 
@@ -216,4 +277,24 @@
       }
     }
   });
+  // Contact form: builds a mailto: link, nothing is sent to any server
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    var cfError = document.getElementById('cfError');
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fields = ['cfName', 'cfEmail', 'cfMsg'].map(function (id) { return document.getElementById(id); });
+      var ok = true;
+      fields.forEach(function (f) {
+        var valid = f.value.trim() !== '' && (f.type !== 'email' || /^\S+@\S+\.\S+$/.test(f.value.trim()));
+        f.setAttribute('aria-invalid', valid ? 'false' : 'true');
+        if (!valid) ok = false;
+      });
+      cfError.hidden = ok;
+      if (!ok) { fields.filter(function (f) { return f.getAttribute('aria-invalid') === 'true'; })[0].focus(); return; }
+      var subject = 'Anfrage über byschai.de von ' + fields[0].value.trim();
+      var body = fields[2].value.trim() + '\n\n\u2014\n' + fields[0].value.trim() + '\n' + fields[1].value.trim();
+      window.location.href = 'mailto:Kabir.Schai@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    });
+  }
 })();
